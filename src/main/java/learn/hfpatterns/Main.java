@@ -1,9 +1,6 @@
 package learn.hfpatterns;
 
-import learn.hfpatterns.simuduck.Duck;
-import learn.hfpatterns.simuduck.MallardDuck;
-import learn.hfpatterns.simuduck.RedheadDuck;
-import learn.hfpatterns.simuduck.RubberDuck;
+import learn.hfpatterns.simuduck.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -21,5 +18,10 @@ public class Main {
         rubber.display();
         rubber.quack();
         rubber.fly();
+
+        Duck decoy = new DecoyDuck();
+        decoy.display();
+        decoy.quack();
+        decoy.fly();
     }
 }
