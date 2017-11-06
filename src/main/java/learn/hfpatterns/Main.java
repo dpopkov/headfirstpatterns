@@ -15,6 +15,7 @@ public class Main {
 
         redhead.display();
         redhead.swim();
+        redhead.fly();
 
         Duck rubber = new RubberDuck();
         rubber.display();
