@@ -1,8 +1,8 @@
 package learn.hfpatterns.pizzashop;
 
-public class Shop {
-    public Pizza orderPizza(String type) {
-        Pizza pizza;
+public class SimplePizzaFactory {
+    public Pizza createPizza(String type) {
+        Pizza pizza = null;
 
         switch (type) {
             case "cheese":
@@ -18,10 +18,6 @@ public class Shop {
                 throw new IllegalArgumentException("Unknown type of pizza: " + type);
         }
 
-        pizza.prepare();
-        pizza.bake();
-        pizza.cut();
-        pizza.box();
 
         return pizza;
     }
