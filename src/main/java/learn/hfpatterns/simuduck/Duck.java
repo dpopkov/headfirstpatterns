@@ -1,17 +1,28 @@
 package learn.hfpatterns.simuduck;
 
 public abstract class Duck {
-    public void quack() {
-        System.out.println("quack quack quack");
+    protected FlyBehavior flyBehavior;
+    protected QuackBehavior quackBehavior;
+
+    public void performQuack() {
+        quackBehavior.quack();
     }
 
     public void swim() {
-        System.out.println("This duck is swimming");
+        System.out.println("All alive ducks can swim, so I'm swimming.");
     }
 
     public abstract void display();
 
-    public void fly() {
-        System.out.println("This duck is flying like all Ducks");
+    public void performFly() {
+        flyBehavior.fly();
+    }
+
+    public void setFlyBehavior(FlyBehavior flyBehavior) {
+        this.flyBehavior = flyBehavior;
+    }
+
+    public void setQuackBehavior(QuackBehavior quackBehavior) {
+        this.quackBehavior = quackBehavior;
     }
 }
