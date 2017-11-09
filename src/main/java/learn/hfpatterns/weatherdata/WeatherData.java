@@ -1,6 +1,10 @@
 package learn.hfpatterns.weatherdata;
 
 public class WeatherData {
+    private CurrentConditionsDisplay currentConditionsDisplay;
+    private StatisticsDisplay statisticsDisplay;
+    private ForeCastDisplay foreCastDisplay;
+
     public double getTemperature() {
         return 0.0;
     }
@@ -18,10 +22,12 @@ public class WeatherData {
      * measurements have been updated.
      */
     public void measurementsChanged() {
-        /*
-        Our job is to implement measurementsChanged()
-        so that it updates the three displays for current
-        conditions, weather stats, and forecase.
-         */
+        double temp = getTemperature();
+        double humidity = getHumidity();
+        double pressure = getPressure();
+
+        currentConditionsDisplay.update(temp, humidity, pressure);
+        statisticsDisplay.update(temp, humidity, pressure);
+        foreCastDisplay.update(temp, humidity, pressure);
     }
 }
