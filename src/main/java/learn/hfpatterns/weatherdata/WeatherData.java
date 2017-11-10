@@ -1,9 +1,10 @@
 package learn.hfpatterns.weatherdata;
 
-public class WeatherData {
-    private CurrentConditionsDisplay currentConditionsDisplay;
-    private StatisticsDisplay statisticsDisplay;
-    private ForeCastDisplay foreCastDisplay;
+import java.util.ArrayList;
+import java.util.List;
+
+public class WeatherData implements Subject {
+    private List<Observer> observers = new ArrayList<>();
 
     public double getTemperature() {
         return 0.0;
@@ -22,12 +23,27 @@ public class WeatherData {
      * measurements have been updated.
      */
     public void measurementsChanged() {
+        notifyObservers();
+    }
+
+    @Override
+    public void registerObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
         double temp = getTemperature();
         double humidity = getHumidity();
         double pressure = getPressure();
 
-        currentConditionsDisplay.update(temp, humidity, pressure);
-        statisticsDisplay.update(temp, humidity, pressure);
-        foreCastDisplay.update(temp, humidity, pressure);
+        for(Observer observer : observers) {
+            observer.update(temp, humidity, pressure);
+        }
     }
 }
