@@ -1,28 +1,34 @@
 package learn.hfpatterns.weatherdata;
 
+import java.util.Observable;
+
 public class StatisticsDisplay extends AbstractDisplay {
     private double minTemp = 200.0;
     private double maxTemp = 0.0;
     private double tempSum = 0.0;
     private int numReadings = 0;
 
-    public StatisticsDisplay(Subject weatherData) {
+    public StatisticsDisplay(Observable weatherData) {
         super(weatherData);
     }
 
     @Override
-    public void update(double temp, double humidity, double pressure) {
-        tempSum += temp;
-        numReadings++;
+    public void update(Observable o, Object arg) {
+        if (o instanceof WeatherData) {
+            WeatherData weatherData = (WeatherData) o;
+            double temp = weatherData.getTemperature();
+            tempSum += temp;
+            numReadings++;
 
-        if (temp > maxTemp) {
-            maxTemp = temp;
-        }
-        if (temp < minTemp) {
-            minTemp = temp;
-        }
+            if (temp > maxTemp) {
+                maxTemp = temp;
+            }
+            if (temp < minTemp) {
+                minTemp = temp;
+            }
 
-        display();
+            display();
+        }
     }
 
     @Override

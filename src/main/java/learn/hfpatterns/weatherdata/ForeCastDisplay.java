@@ -1,18 +1,23 @@
 package learn.hfpatterns.weatherdata;
 
+import java.util.Observable;
+
 public class ForeCastDisplay extends AbstractDisplay {
     private double currentPressure = 29.92f;
     private double lastPressure;
 
-    public ForeCastDisplay(Subject weatherData) {
+    public ForeCastDisplay(Observable weatherData) {
         super(weatherData);
     }
 
     @Override
-    public void update(double temp, double humidity, double pressure) {
-        lastPressure = currentPressure;
-        currentPressure = pressure;
-        display();
+    public void update(Observable o, Object arg) {
+        if (o instanceof WeatherData) {
+            WeatherData weatherData = (WeatherData) o;
+            lastPressure = currentPressure;
+            currentPressure = weatherData.getPressure();
+            display();
+        }
     }
 
     @Override

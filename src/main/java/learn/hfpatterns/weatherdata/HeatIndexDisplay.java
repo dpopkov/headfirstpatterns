@@ -1,10 +1,12 @@
 package learn.hfpatterns.weatherdata;
 
+import java.util.Observable;
+
 public class HeatIndexDisplay extends AbstractDisplay {
     private double heatIndex;
 
-    public HeatIndexDisplay(Subject weatherData) {
-        super(weatherData);
+    public HeatIndexDisplay(Observable observable) {
+        super(observable);
     }
 
     @Override
@@ -13,9 +15,12 @@ public class HeatIndexDisplay extends AbstractDisplay {
     }
 
     @Override
-    public void update(double temp, double humidity, double pressure) {
-        heatIndex = computeHeatIndex(temp, humidity);
-        display();
+    public void update(Observable o, Object arg) {
+        if (o instanceof WeatherData) {
+            WeatherData weatherData = (WeatherData) o;
+            heatIndex = computeHeatIndex(weatherData.getTemperature(), weatherData.getHumidity());
+            display();
+        }
     }
 
     private double computeHeatIndex(double t, double rh) {

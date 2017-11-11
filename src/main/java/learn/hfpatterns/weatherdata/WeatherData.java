@@ -1,10 +1,8 @@
 package learn.hfpatterns.weatherdata;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Observable;
 
-public class WeatherData implements Subject {
-    private List<Observer> observers = new ArrayList<>();
+public class WeatherData extends Observable {
     private double temperature;
     private double humidity;
     private double pressure;
@@ -33,23 +31,7 @@ public class WeatherData implements Subject {
      * measurements have been updated.
      */
     public void measurementsChanged() {
+        setChanged();
         notifyObservers();
-    }
-
-    @Override
-    public void registerObserver(Observer observer) {
-        observers.add(observer);
-    }
-
-    @Override
-    public void removeObserver(Observer observer) {
-        observers.remove(observer);
-    }
-
-    @Override
-    public void notifyObservers() {
-        for(Observer observer : observers) {
-            observer.update(getTemperature(), getHumidity(), getPressure());
-        }
     }
 }

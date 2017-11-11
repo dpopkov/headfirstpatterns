@@ -1,10 +1,13 @@
 package learn.hfpatterns.weatherdata;
 
-public abstract class AbstractDisplay implements Observer, DisplayElement {
-    protected Subject weatherData;
+import java.util.Observable;
+import java.util.Observer;
 
-    public AbstractDisplay(Subject weatherData) {
-        this.weatherData = weatherData;
-        weatherData.registerObserver(this);
+public abstract class AbstractDisplay implements Observer, DisplayElement {
+    protected Observable observable;
+
+    public AbstractDisplay(Observable observable) {
+        this.observable = observable;
+        observable.addObserver(this);
     }
 }
