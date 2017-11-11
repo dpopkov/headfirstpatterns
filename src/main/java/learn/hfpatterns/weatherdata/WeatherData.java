@@ -5,17 +5,27 @@ import java.util.List;
 
 public class WeatherData implements Subject {
     private List<Observer> observers = new ArrayList<>();
+    private double temperature;
+    private double humidity;
+    private double pressure;
 
     public double getTemperature() {
-        return 0.0;
+        return temperature;
     }
 
     public double getHumidity() {
-        return 0.0;
+        return humidity;
     }
 
     public double getPressure() {
-        return 0.0;
+        return pressure;
+    }
+
+    public void setMeasurements(double temperature, double humidity, double pressure) {
+        this.temperature = temperature;
+        this.humidity = humidity;
+        this.pressure = pressure;
+        measurementsChanged();
     }
 
     /**
@@ -38,12 +48,8 @@ public class WeatherData implements Subject {
 
     @Override
     public void notifyObservers() {
-        double temp = getTemperature();
-        double humidity = getHumidity();
-        double pressure = getPressure();
-
         for(Observer observer : observers) {
-            observer.update(temp, humidity, pressure);
+            observer.update(getTemperature(), getHumidity(), getPressure());
         }
     }
 }
