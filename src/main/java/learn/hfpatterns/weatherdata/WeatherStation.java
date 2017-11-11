@@ -7,6 +7,7 @@ public class WeatherStation {
         CurrentConditionsDisplay currentDisplay = new CurrentConditionsDisplay(weatherData);
         StatisticsDisplay statisticsDisplay = new StatisticsDisplay(weatherData);
         ForeCastDisplay foreCastDisplay = new ForeCastDisplay(weatherData);
+        HeatIndexDisplay heatIndexDisplay = new HeatIndexDisplay(weatherData);
 
         weatherData.setMeasurements(80, 65, 30.4);
         System.out.println();
@@ -14,10 +15,10 @@ public class WeatherStation {
         weatherData.setMeasurements(82, 70, 29.2);
         System.out.println();
 
-        weatherData.setMeasurements(78, 65, 29.2);
+        weatherData.setMeasurements(78, 90, 29.2);
         System.out.println();
 
-        weatherData.setMeasurements(78, 65, 29.2);
+        weatherData.setMeasurements(78, 90, 29.2);
         System.out.println();
     }
 }

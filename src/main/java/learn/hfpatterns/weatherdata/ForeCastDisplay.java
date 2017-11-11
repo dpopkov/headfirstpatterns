@@ -1,8 +1,8 @@
 package learn.hfpatterns.weatherdata;
 
 public class ForeCastDisplay extends AbstractDisplay {
-    private double lastTemperature;
-    private double currentTemperature;
+    private double currentPressure = 29.92f;
+    private double lastPressure;
 
     public ForeCastDisplay(Subject weatherData) {
         super(weatherData);
@@ -10,19 +10,20 @@ public class ForeCastDisplay extends AbstractDisplay {
 
     @Override
     public void update(double temp, double humidity, double pressure) {
-        lastTemperature = currentTemperature;
-        currentTemperature = temp;
+        lastPressure = currentPressure;
+        currentPressure = pressure;
         display();
     }
 
     @Override
     public void display() {
-        if (lastTemperature < currentTemperature) {
-            System.out.println("Improving weather on the way");
-        } else if (lastTemperature > currentTemperature) {
-            System.out.println("Watch out for cooler, rainy weather");
-        } else {
+        System.out.print("Forecast: ");
+        if (currentPressure > lastPressure) {
+            System.out.println("Improving weather on the way!");
+        } else if (currentPressure == lastPressure) {
             System.out.println("More of the same");
+        } else if (currentPressure < lastPressure) {
+            System.out.println("Watch out for cooler, rainy weather");
         }
     }
 }

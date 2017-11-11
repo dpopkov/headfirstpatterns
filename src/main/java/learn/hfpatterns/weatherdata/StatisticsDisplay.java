@@ -1,14 +1,10 @@
 package learn.hfpatterns.weatherdata;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 public class StatisticsDisplay extends AbstractDisplay {
-    private List<Double> temperatures = new ArrayList<>();
-    private double min;
-    private double average;
-    private double max;
+    private double minTemp = 200.0;
+    private double maxTemp = 0.0;
+    private double tempSum = 0.0;
+    private int numReadings = 0;
 
     public StatisticsDisplay(Subject weatherData) {
         super(weatherData);
@@ -16,24 +12,22 @@ public class StatisticsDisplay extends AbstractDisplay {
 
     @Override
     public void update(double temp, double humidity, double pressure) {
-        temperatures.add(temp);
-        Collections.sort(temperatures);
-        calculateStats();
-        display();
-    }
+        tempSum += temp;
+        numReadings++;
 
-    private void calculateStats() {
-        min = temperatures.get(0);
-        double sum = 0;
-        for (double t : temperatures) {
-            sum += t;
+        if (temp > maxTemp) {
+            maxTemp = temp;
         }
-        average = sum / temperatures.size();
-        max = temperatures.get(temperatures.size() - 1);
+        if (temp < minTemp) {
+            minTemp = temp;
+        }
+
+        display();
     }
 
     @Override
     public void display() {
-        System.out.printf("Avg/Max/Min temperature = %.1f/%.1f/%.1f%n", average, max, min);
+        double average = tempSum / numReadings;
+        System.out.printf("Avg/Max/Min temperature = %.1f/%.1f/%.1f%n", average, maxTemp, minTemp);
     }
 }
