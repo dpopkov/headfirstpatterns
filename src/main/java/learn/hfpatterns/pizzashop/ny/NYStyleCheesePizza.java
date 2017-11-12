@@ -3,8 +3,11 @@ package learn.hfpatterns.pizzashop.ny;
 import learn.hfpatterns.pizzashop.Pizza;
 
 public class NYStyleCheesePizza extends Pizza {
-    @Override
-    public void prepare() {
+    public NYStyleCheesePizza() {
+        name = "NY Style Sauce and Cheese Pizza";
+        dough = "Thin Crust Dough";
+        sauce = "Marinara Sauce";
 
+        toppings.add("Grated Reggiano Cheese");
     }
 }
