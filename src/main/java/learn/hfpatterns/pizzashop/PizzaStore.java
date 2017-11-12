@@ -1,16 +1,14 @@
 package learn.hfpatterns.pizzashop;
 
-public class PizzaStore {
-    private SimplePizzaFactory factory;
+public abstract class PizzaStore {
 
-    public PizzaStore(SimplePizzaFactory factory) {
-        this.factory = factory;
+    public PizzaStore() {
     }
 
     public Pizza orderPizza(String type) {
         Pizza pizza;
 
-        pizza = factory.createPizza(type);
+        pizza = createPizza(type);
 
         pizza.prepare();
         pizza.bake();
@@ -19,4 +17,6 @@ public class PizzaStore {
 
         return pizza;
     }
+
+    public abstract Pizza createPizza(String type);
 }
